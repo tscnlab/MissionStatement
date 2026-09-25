@@ -6,14 +6,22 @@ project:
     - compare.qmd
   resources:
     - assets/tscn-logo.png
+    - assets/favicon.png
+    - assets/social-preview.png
     - MissionStatement_*.md
     - CHANGELOG.md
 
 website:
-  title: Mission statement · TSCN
+  title: TSCN
   site-url: https://tscnlab.github.io/MissionStatement/
+  favicon: assets/favicon.png
+  image: assets/social-preview.png
+  image-alt: Mission statement of the Translational Sensory & Circadian Neuroscience Unit (MPS/TUM/TUMCREATE).
   description: Principles of the Translational Sensory & Circadian Neuroscience Unit, with a history of changes.
   search: false
+  open-graph: true
+  twitter-card:
+    card-style: summary_large_image
 
 format:
   html:

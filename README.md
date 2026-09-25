@@ -91,6 +91,30 @@ vendored in `assets/projects.css`; mission-specific additions live in
 `assets/mission.css`. See `assets/PROVENANCE.md` for source identifiers and the logo
 checksum. Links use relative paths to work under a GitHub project site URL.
 
+### Favicon and social sharing
+
+The favicon reuses the Projects site's circular mark. The social card uses its
+HTML template, adapted to “Mission statement” and this site's address. Quarto
+adds Open Graph and Twitter large-image metadata to both pages, with their
+individual titles and descriptions. Both image files are published in `assets/`;
+social-image metadata uses absolute URLs under `/MissionStatement/`.
+
+To change the social card, edit `templates/social-preview.html` and regenerate:
+
+```sh
+python -m pip install -r requirements-dev.txt
+python -m playwright install chromium
+python scripts/render_social_preview.py
+quarto render
+python scripts/check_site.py
+```
+
+An existing Chrome installation can be selected using
+`PLAYWRIGHT_CHROMIUM_EXECUTABLE` instead of installing Chromium. Review and
+commit the generated PNG, and update its checksum in `assets/PROVENANCE.md`.
+Normal rendering and GitHub Pages publishing use the committed image and do not
+need the optional browser dependencies.
+
 ## Publish on GitHub Pages
 
 The workflow in `.github/workflows/pages.yml` renders and checks pull requests.
