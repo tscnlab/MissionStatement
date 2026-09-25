@@ -191,7 +191,7 @@ def current_markdown(versions):
     latest = versions[-1]
     source = re.sub(r"^# Mission Statement", "# Mission statement", latest.source)
     source = re.sub(r"^### ", "## ", source, flags=re.MULTILINE)
-    links = ('<div class="mission-links"><a href="compare.html">Compare versions</a>'
+    links = ('<div class="mission-links">'
              '<a href="MissionStatement_Current.md" download>Download Markdown</a></div>')
     return source.replace("# Mission statement\n", f"# Mission statement\n\n{links}\n", 1)
 

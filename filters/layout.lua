@@ -10,7 +10,7 @@ function Pandoc(doc)
     .. '<header class="site-header"><a class="brand" href="index.html" aria-label="TSCN mission statement">'
     .. '<img src="assets/tscn-logo.png" width="7660" height="1451" alt="Translational Sensory &amp; Circadian Neuroscience Unit (MPS/TUM/TUMCREATE)"></a>'
     .. '<nav class="site-nav" aria-label="Main navigation"><ul class="nav-list" role="list">'
-    .. '<li><a href="index.html"' .. current .. '>Mission statement</a></li>'
+    .. '<li><a href="index.html"' .. current .. '>Current statement</a></li>'
     .. '<li><a href="compare.html"' .. compare .. '>Compare versions</a></li>'
     .. '<li><a href="https://join.tscnlab.org/">Join the unit</a></li></ul></nav></header>'
   local footer = '<footer class="site-footer"><p>Translational Sensory &amp; Circadian Neuroscience Unit (MPS/TUM/TUMCREATE)</p>'

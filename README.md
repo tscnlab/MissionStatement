@@ -31,6 +31,10 @@ The main outputs are two reproducible Quarto notebooks and their rendered HTML:
 | `index.qmd` | `_site/index.html` | Current statement |
 | `compare.qmd` | `_site/compare.html` | Compare any two available versions |
 
+The homepage and **Current statement** navigation link open the standalone
+current text. Comparison controls, change summaries and the comparison script
+are confined to **Compare versions**.
+
 Use Quarto **1.6.43** and Python **3.12 or newer**. The GitHub workflow pins
 Quarto and the direct notebook dependencies; Python comparison code uses only
 the standard library. Pandoc is supplied by Quarto.

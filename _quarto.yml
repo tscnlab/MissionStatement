@@ -30,8 +30,6 @@ format:
     lang: en
     filters:
       - filters/layout.lua
-    include-after-body:
-      - text: '<script src="assets/compare.js"></script>'
 
 jupyter: python3
 execute:
