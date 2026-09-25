@@ -1,0 +1,14 @@
+---
+title: Mission statement
+description: The shared principles of the Translational Sensory & Circadian Neuroscience Unit.
+---
+
+```{python}
+#| output: asis
+from scripts.mission_site import load_versions, current_markdown
+
+# The Markdown files remain the source of truth. This also checks that the
+# current statement and the latest dated snapshot are identical.
+versions = load_versions()
+print(current_markdown(versions))
+```

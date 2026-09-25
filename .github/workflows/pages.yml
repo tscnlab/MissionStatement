@@ -1,0 +1,57 @@
+name: Render and publish mission statement
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.6.43'
+      - name: Install notebook dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check source and comparison logic
+        run: python -m unittest discover -s tests -v
+      - name: Render the Quarto notebooks
+        run: quarto render
+      - name: Check the generated site
+        run: |
+          python scripts/check_site.py
+          node --check assets/compare.js
+          node tests/check_controls.cjs
+      - name: Upload site for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

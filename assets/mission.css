@@ -1,0 +1,65 @@
+/* Mission statement additions; identity and layout come from Projects. */
+.visually-hidden {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
+.site-nav {flex: 0 1 auto; max-width: none;}
+.nav-list {display: flex; flex-wrap: wrap; gap: 12px 26px;}
+.site-nav a {font-size: .875rem;}
+.site-footer {font-size: .875rem;}
+.mission-page h2 {margin-top: 2.5rem;}
+.mission-page h2:first-of-type {margin-top: 1.7rem;}
+.mission-links {display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 1.7rem 0 2rem; font-size: .9375rem;}
+.comparison-page > p {max-width: 780px;}
+.compare-controls {display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-top: 1px solid var(--line); padding-top: 24px; margin: 24px 0 18px;}
+.compare-controls label {display: block; font-size: .9375rem; font-weight: 600; margin-bottom: 8px;}
+.compare-controls select {width: 100%; min-height: 52px; padding: 10px 14px; border: 1px solid #a8bbb9; border-radius: 3px; background: #fff; color: var(--ink);}
+.compare-tools {display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin: 0 0 24px; font-size: .9375rem;}
+.compare-tools label {display: flex; gap: 9px; align-items: center;}
+.compare-tools input {width: 18px; height: 18px; accent-color: var(--ink);}
+.compare-legend {display: flex; flex-wrap: wrap; gap: 10px 24px; color: var(--muted); margin: 0 0 24px; font-size: .9375rem;}
+.comparison-summary {padding: 18px 22px; border-left: 3px solid #b9cecb; background: var(--wash); margin-bottom: 30px;}
+.comparison-summary p {margin: 0;}
+.order-note {font-size: .9375rem; color: var(--muted); margin-top: .6rem!important;}
+.diff-section {border-top: 1px solid var(--line); padding: 26px 0 16px;}
+.diff-section h2 {font-size: 1.7rem; margin: 0 0 12px;}
+.diff-status {font-size: .875rem; color: var(--muted); margin: 0 0 20px;}
+.change-notes {padding: 18px 22px; margin: 0 0 24px; background: var(--wash); border-left: 3px solid #b9cecb;}
+.change-notes h3 {font: 600 .9375rem/1.5 var(--sans); margin: 0 0 10px;}
+.change-notes ul {margin: 0; padding-left: 20px;}
+.change-notes li {font-size: .9375rem; margin: 8px 0;}
+.change-stamp {display: block; color: var(--muted); font-size: .875rem; margin-bottom: 3px;}
+.diff-columns {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px;}
+.diff-column {min-width: 0; overflow-wrap: anywhere;}
+.diff-column + .diff-column {border-left: 1px solid var(--line); padding-left: 32px;}
+.diff-column h3 {font: 600 .9375rem/1.5 var(--sans); margin: 0 0 14px;}
+.diff-body {font-size: 1rem; line-height: 1.75;}
+.diff-body p:last-child {margin-bottom: .8rem;}
+ins {background: #dceee7; color: #154d3c; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;}
+del {background: #f8e3df; color: #82392b; text-decoration: line-through;}
+ins a, del a {color: inherit;}
+.source-diff {margin: 16px 0 24px; font-size: .9375rem;}
+.source-diff summary {cursor: pointer; color: var(--ink); padding: 8px 0;}
+.source-diff pre {white-space: pre-wrap; overflow-wrap: anywhere; font: .875rem/1.6 ui-monospace, monospace; background: #fff; border: 1px solid var(--line); padding: 18px; max-height: 32rem; overflow-y: auto;}
+.comparison-empty {padding: 24px; background: var(--wash);}
+.version-history {border-top: 1px solid var(--line); margin-top: 36px; padding-top: 4px;}
+.version-history ul {padding-left: 22px;}
+.version-history li {margin: 10px 0;}
+.history-provenance {font-size: .875rem; color: var(--muted);}
+.revision-entry {border-top: 1px solid var(--line); padding: 18px 0;}
+.revision-entry summary {cursor: pointer; color: var(--ink); font-size: 1rem;}
+.revision-entry summary span {font-weight: 600; margin-right: 20px;}
+.revision-entry h4 {font: 600 1rem/1.5 var(--sans); color: var(--ink); margin: 22px 0 8px;}
+.revision-entry ul {margin-top: 0; max-width: 880px; font-size: 1rem;}
+.revision-source {font-size: .875rem; margin: 14px 0;}
+@media (max-width: 760px) {
+  .compare-controls, .diff-columns {grid-template-columns: minmax(0, 1fr); gap: 18px;}
+  .diff-column + .diff-column {border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px;}
+  .comparison-page h1 {font-size: 2.375rem; letter-spacing: -1px;}
+  .nav-list {gap: 8px 22px;}
+  .site-footer a {white-space: normal;}
+}
+@media print {
+  .compare-controls, .compare-tools {display: none;}
+  .diff-columns {display: block;}
+  .diff-column + .diff-column {border: 0; padding: 0;}
+  .diff-section h2, .diff-column h3 {break-after: avoid;}
+  ins, del {-webkit-print-color-adjust: exact; print-color-adjust: exact;}
+}
