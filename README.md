@@ -11,6 +11,9 @@ The principles of the Translational Sensory & Circadian Neuroscience Unit
 - The current file and latest snapshot must be byte-for-byte identical.
 - Preserve historical snapshots. The comparison page discovers dated files
   automatically; it does not need a manually maintained version list.
+- `CHANGELOG.md` contains dated bullet-point summaries for every revision.
+  Its headings use each snapshot's original date; the separate summary-added
+  date records when the retrospective notes were written.
 
 The 2026 revision adds the roadshow and concrete open-science practices,
 acknowledges the resources needed for replication and past wellbeing challenges,
@@ -67,6 +70,15 @@ The default comparison is the latest snapshot against its predecessor. The page
 embeds every version pair; it requires no service, API or external JavaScript
 library. Without JavaScript the default comparison remains readable.
 
+Each changed section includes dated editorial bullets from `CHANGELOG.md`.
+Comparisons spanning several versions show the intervening revision notes;
+reverse comparisons explicitly label those notes as the original forward
+changes. The revision history at the bottom contains all dated entries, including
+v1.0, with expandable summaries and links to the Markdown snapshots. A locally
+absent historical snapshot retains its notes and a link to the source on GitHub.
+Rendering checks that every changed section has a description and that note dates
+match the available snapshots.
+
 ## Shared design
 
 The logo, colours, fonts, spacing and layout follow
@@ -96,7 +108,11 @@ Only `_site/` is uploaded. Rendered output and execution caches are ignored by G
 
 1. Edit `MissionStatement_Current.md`, including its version/date and retreat history.
 2. Copy it to the new dated snapshot using the existing filename convention.
-3. Render and check the site, review the comparison, and merge the revision into main.
+3. Add a revision to `CHANGELOG.md` using `## vX.Y | D Month YYYY`, followed by
+   exact section headings at level three and bullet points describing their
+   changes. Use `### Section order` for reordering, and include the version/date
+   update under `### Version history`.
+4. Render and check the site, review the comparison, and merge the revision into main.
 
 The statement retains its existing license declaration. The branding and
 institutional marks remain subject to their owners' rights.

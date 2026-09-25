@@ -7,6 +7,7 @@ project:
   resources:
     - assets/tscn-logo.png
     - MissionStatement_*.md
+    - CHANGELOG.md
 
 website:
   title: Mission statement · TSCN

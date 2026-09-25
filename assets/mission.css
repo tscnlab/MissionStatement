@@ -21,6 +21,11 @@
 .diff-section {border-top: 1px solid var(--line); padding: 26px 0 16px;}
 .diff-section h2 {font-size: 1.7rem; margin: 0 0 12px;}
 .diff-status {font-size: .875rem; color: var(--muted); margin: 0 0 20px;}
+.change-notes {padding: 18px 22px; margin: 0 0 24px; background: var(--wash); border-left: 3px solid #b9cecb;}
+.change-notes h3 {font: 600 .9375rem/1.5 var(--sans); margin: 0 0 10px;}
+.change-notes ul {margin: 0; padding-left: 20px;}
+.change-notes li {font-size: .9375rem; margin: 8px 0;}
+.change-stamp {display: block; color: var(--muted); font-size: .875rem; margin-bottom: 3px;}
 .diff-columns {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px;}
 .diff-column {min-width: 0; overflow-wrap: anywhere;}
 .diff-column + .diff-column {border-left: 1px solid var(--line); padding-left: 32px;}
@@ -37,6 +42,13 @@ ins a, del a {color: inherit;}
 .version-history {border-top: 1px solid var(--line); margin-top: 36px; padding-top: 4px;}
 .version-history ul {padding-left: 22px;}
 .version-history li {margin: 10px 0;}
+.history-provenance {font-size: .875rem; color: var(--muted);}
+.revision-entry {border-top: 1px solid var(--line); padding: 18px 0;}
+.revision-entry summary {cursor: pointer; color: var(--ink); font-size: 1rem;}
+.revision-entry summary span {font-weight: 600; margin-right: 20px;}
+.revision-entry h4 {font: 600 1rem/1.5 var(--sans); color: var(--ink); margin: 22px 0 8px;}
+.revision-entry ul {margin-top: 0; max-width: 880px; font-size: 1rem;}
+.revision-source {font-size: .875rem; margin: 14px 0;}
 @media (max-width: 760px) {
   .compare-controls, .diff-columns {grid-template-columns: minmax(0, 1fr); gap: 18px;}
   .diff-column + .diff-column {border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px;}

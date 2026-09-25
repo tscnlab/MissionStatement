@@ -47,7 +47,14 @@ data = json.loads(match[1])
 assert len(data['comparisons']) == len(data['versions']) ** 2
 assert data['defaultTo'] == data['versions'][-1]['id']
 assert data['comparisons']['v1.4:v1.5']['moved'] == 5
+assert '<time datetime="2026-09-10">' in data['comparisons']['v1.4:v1.5']['html']
+assert 'class="change-notes"' in data['comparisons']['v1.4:v1.5']['html']
+for version, stamp in [('v1.0', '2022-10-16'), ('v1.1', '2023-01-16'),
+                       ('v1.2', '2023-02-24'), ('v1.3', '2023-07-27'),
+                       ('v1.4', '2024-09-02'), ('v1.5', '2026-09-10')]:
+    assert f'id="revision-{version.replace(".", "-")}"' in comparison
+    assert f'<time datetime="{stamp}">' in comparison
 assert 'nachtmensch-oder-fruehaufsteher.de' in (SITE / 'index.html').read_text(encoding='utf-8')
 digest = sha256((ROOT / 'assets/tscn-logo.png').read_bytes()).hexdigest()
 assert digest == 'ad721549a8fd502f376ead0afa3426265bca46491607bfea3043db5e7dbb6ee3'
-print(f'Validated both pages, local links, logo and {len(data["comparisons"])} comparisons.')
+print(f'Validated both pages, local links, logo, dated change notes and {len(data["comparisons"])} comparisons.')

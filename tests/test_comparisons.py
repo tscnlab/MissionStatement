@@ -1,8 +1,11 @@
 """Check that the review cannot lose prose or misrepresent section moves."""
 from html.parser import HTMLParser
+from pathlib import Path
+import tempfile
 import unittest
 
-from scripts.mission_site import Version, compare, load_versions, markdown_html, prose_diff, split_sections
+from scripts.mission_site import (ROOT, Version, compare, load_versions, load_change_notes,
+                                 markdown_html, prose_diff, revision_history, split_sections)
 
 
 class VisibleText(HTMLParser):
@@ -81,6 +84,53 @@ class Comparisons(unittest.TestCase):
     def test_duplicate_headings_are_rejected(self):
         with self.assertRaises(ValueError):
             split_sections('# Mission Statement\n\n### A\nOne\n\n### A\nTwo')
+
+    def test_historical_notes_use_original_dates(self):
+        versions = load_versions()
+        notes, added = load_change_notes(versions)
+        self.assertEqual(str(added), '2026-09-25')
+        self.assertEqual(str(notes['v1.0'].dated), '2022-10-16')
+        self.assertEqual(str(notes['v1.2'].dated), '2023-02-24')
+        self.assertEqual(str(notes['v1.5'].dated), '2026-09-10')
+        history = revision_history(versions, notes, added)
+        for note in notes.values():
+            self.assertIn(note.time_html, history)
+            self.assertIn(f'id="revision-{note.id.replace(".", "-")}"', history)
+
+    def test_range_notes_include_intervening_changes_with_correct_dates(self):
+        versions = load_versions()
+        notes, _ = load_change_notes(versions)
+        by_id = {version.id: version for version in versions}
+        result = compare(by_id['v1.1'], by_id['v1.5'], notes)['html']
+        self.assertIn('<time datetime="2023-02-24">', result)
+        self.assertIn('<time datetime="2023-07-27">', result)
+        self.assertIn('<time datetime="2024-09-02">', result)
+        self.assertIn('<time datetime="2026-09-10">', result)
+        self.assertNotIn('<time datetime="2023-01-16">', result)
+        latest = compare(by_id['v1.4'], by_id['v1.5'], notes)['html']
+        self.assertIn('CODECHECK', latest)
+        self.assertIn('<time datetime="2026-09-10">', latest)
+        self.assertNotIn('<time datetime="2024-09-02">', latest)
+
+    def test_reverse_notes_explain_direction_and_identical_versions_have_no_changes(self):
+        versions = load_versions()
+        notes, _ = load_change_notes(versions)
+        reverse = compare(versions[-1], versions[-2], notes)['html']
+        self.assertIn('text comparison runs backwards in time', reverse)
+        same = compare(versions[-1], versions[-1], notes)['html']
+        self.assertNotIn('class="change-notes"', same)
+
+    def test_inconsistent_dates_and_missing_section_notes_are_rejected(self):
+        versions = load_versions()
+        original = (ROOT / 'CHANGELOG.md').read_text()
+        invalid = [original.replace('v1.5 | 10 September 2026', 'v1.5 | 11 September 2026'),
+                   original.replace('### Open scholarship and open science', '### Unrelated heading')]
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for content in invalid:
+                (root / 'CHANGELOG.md').write_text(content)
+                with self.assertRaises(ValueError):
+                    load_change_notes(versions, root)
 
 
 if __name__ == '__main__':
