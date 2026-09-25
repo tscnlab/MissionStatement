@@ -1,0 +1,42 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - compare.qmd
+  resources:
+    - assets/tscn-logo.png
+    - MissionStatement_*.md
+
+website:
+  title: Mission statement · TSCN
+  site-url: https://tscnlab.github.io/MissionStatement/
+  description: Principles of the Translational Sensory & Circadian Neuroscience Unit, with a history of changes.
+  search: false
+
+format:
+  html:
+    theme: none
+    css:
+      - assets/projects.css
+      - assets/mission.css
+    embed-resources: true
+    toc: false
+    title-block-style: none
+    template-partials:
+      - templates/title-block.html
+    anchor-sections: false
+    lang: en
+    filters:
+      - filters/layout.lua
+    include-after-body:
+      - text: '<script src="assets/compare.js"></script>'
+
+jupyter: python3
+execute:
+  echo: false
+  warning: false
+  error: false
+  cache: false
+  freeze: false
+  daemon: false

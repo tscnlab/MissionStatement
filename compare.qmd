@@ -1,0 +1,17 @@
+---
+title: Compare versions
+description: Compare the wording and section order of published versions of the unit's mission statement.
+---
+
+# Compare versions
+
+Choose two versions to see how the statement has changed. Sections are matched by heading, so changes in order do not hide edits to the wording.
+
+```{python}
+#| output: asis
+from scripts.mission_site import load_versions, comparison_page
+
+# All comparisons are calculated here with Python's standard library.
+# The rendered HTML contains the data and works without a server or an API.
+print(comparison_page(load_versions()))
+```
